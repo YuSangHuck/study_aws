@@ -1,8 +1,7 @@
 // dependencies
 var async = require('async');
 var AWS = require('aws-sdk');
-var gm = require('gm')
-            .subClass({ imageMagick: true }); // Enable ImageMagick integration.
+var gm = require('gm').subClass({ imageMagick: true }); // Enable ImageMagick integration.
 var util = require('util');
 
 // constants
@@ -17,9 +16,8 @@ exports.handler = function(event, context, callback) {
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
-    var srcKey    =
-    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    var dstBucket = srcBucket + "resized";
+    var srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+    var dstBucket = srcBucket + "-resized";
     var dstKey    = "resized-" + srcKey;
 
     // Sanity check: validate that source and destination are different buckets.
