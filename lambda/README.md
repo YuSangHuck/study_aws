@@ -1,0 +1,3 @@
+# study aws
+
+> lambda를 공부하는 repository입니다.
