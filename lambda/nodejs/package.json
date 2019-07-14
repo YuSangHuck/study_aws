@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/YuSangHuck/study_aws/issues"
   },
-  "homepage": "https://github.com/YuSangHuck/study_aws#readme"
+  "homepage": "https://github.com/YuSangHuck/study_aws#readme",
+  "dependencies": {
+    "async": "^3.1.0",
+    "gm": "^1.23.1"
+  }
 }
