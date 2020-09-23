@@ -67,9 +67,9 @@ jobs:
       - run:
           name: Setting AWS configure default
           command: >-
-            echo $AWS_REGION &&
-            echo $AWS_ACCESS_KEY &&
-            echo $AWS_SECREET_KEY &&
+            echo $AWS_REGION_HELLO_LAMBDA_GOLANG &&
+            echo $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
+            echo $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG &&
             aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG &&
             aws configure set default.region $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
             aws configure set default.region $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
