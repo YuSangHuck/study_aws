@@ -11,12 +11,12 @@ jobs:
     steps:
       - checkout # check out source code to working directory
       - run:
-          name: Check source code
+          name: "[debug]Check source code"
           working_directory: './lambda/go'
           command: ls -al
 
       - run:
-          name: Check go environment
+          name: "[debug]Check go environment"
           command: go env
 
       # - run:
@@ -47,7 +47,7 @@ jobs:
             env GOOS=linux go build -v -ldflags '-d -s -w' -a -tags netgo -installsuffix netgo -o main main.go &&
             zip function.zip main
       - run:
-          name: Check Build go artifact
+          name: "[debug]Check Build go artifact"
           working_directory: './lambda/go'
           command: >-
             ls -al
@@ -71,7 +71,7 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
             aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
       - run:
-          name: Check AWS configure default
+          name: "[debug]Check AWS configure default"
           command: >-
             aws configure list
 
@@ -81,18 +81,18 @@ jobs:
           command: >-
             aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
 
-      - run:
-          name: Validate service is working
-          command: |
-            sleep 5
-            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
+      # - run:
+      #     name: Validate service is working
+      #     command: |
+      #       sleep 5
+      #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
 
-      - store_artifacts: # upload test summary for display in Artifacts
-          path: /tmp/test-results
-          destination: raw-test-output
+      # - store_artifacts: # upload test summary for display in Artifacts
+      #     path: /tmp/test-results
+      #     destination: raw-test-output
 
-      - store_test_results: # upload test results for display in Test Summary
-          path: /tmp/test-results
+      # - store_test_results: # upload test results for display in Test Summary
+      #     path: /tmp/test-results
 
   # deploy:
   #   steps:
