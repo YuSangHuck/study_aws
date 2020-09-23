@@ -9,6 +9,9 @@ jobs:
       # TARGET_PATH: '/src' # CIRCLE_WORKING_DIRECTORY == "~/project"
     steps:
       - checkout # check out source code to working directory
+      - run:
+          name: Check sourcecode
+          command: ls -al
 
       - run:
           name: Check go environment
