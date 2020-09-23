@@ -2,30 +2,29 @@ package main
 
 import (
 	"context"
-	"log"
-	"time"
 
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
 func LongRunningHandler(ctx context.Context) (string, error) {
 
-	deadline, _ := ctx.Deadline()
-	deadline = deadline.Add(-100 * time.Millisecond)
-	timeoutChannel := time.After(time.Until(deadline))
+	return "반갑수다!", nil
+	// deadline, _ := ctx.Deadline()
+	// deadline = deadline.Add(-100 * time.Millisecond)
+	// timeoutChannel := time.After(time.Until(deadline))
 
-	for {
+	// for {
 
-		select {
+	// 	select {
 
-		case <-timeoutChannel:
-			return "Finished before timing out.", nil
+	// 	case <-timeoutChannel:
+	// 		return "Finished before timing out.", nil
 
-		default:
-			log.Print("hello!")
-			time.Sleep(50 * time.Millisecond)
-		}
-	}
+	// 	default:
+	// 		log.Print("hello!")
+	// 		time.Sleep(50 * time.Millisecond)
+	// 	}
+	// }
 }
 
 func main() {
