@@ -71,12 +71,12 @@ jobs:
       #       sleep 5
       #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
 
-      # - store_artifacts: # upload test summary for display in Artifacts
-      #     path: /tmp/test-results
-      #     destination: raw-test-output
+      - store_artifacts: # upload test summary for display in Artifacts
+          path: /tmp/test-results
+          destination: raw-test-output
 
-      # - store_test_results: # upload test results for display in Test Summary
-      #     path: /tmp/test-results
+      - store_test_results: # upload test results for display in Test Summary
+          path: /tmp/test-results
 
   deploy:
     docker:
