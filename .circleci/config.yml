@@ -9,13 +9,16 @@ jobs:
       # TARGET_PATH: '/src' # CIRCLE_WORKING_DIRECTORY == "~/project"
       TARGET_LAMBDA_FUNCTION: "hello-lambda-golang"
     steps:
-      - run: echo $AWS_REGION_HELLO_LAMBDA_GOLANG
-      - run: echo $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
-      - run: echo $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
-      - run: aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG
-      - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
-      - run: aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
-      - run: aws configure list
+      - run:
+          name: Setting AWS configure default
+          command: >-
+            aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
+            aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
+      - run:
+          name: Check AWS configure default
+          command: >-
+            aws configure list
 
       # - checkout # check out source code to working directory
       # - run:
