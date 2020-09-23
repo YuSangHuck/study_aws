@@ -13,8 +13,8 @@ jobs:
       - run: echo $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
       - run: echo $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
       - run: aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG
-      - run: aws configure set default.region $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
-      - run: aws configure set default.region $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
+      - run: aws configure set default.access_key $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
+      - run: aws configure set default.secreet_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
       - run: aws configure list
 
       # - checkout # check out source code to working directory
