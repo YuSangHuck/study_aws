@@ -10,8 +10,8 @@ jobs:
     steps:
       - checkout # check out source code to working directory
       - run:
+          name: Check source code
           working_directory: './lambda/go'
-          name: Check sourcecode
           command: ls -al
 
       - run:
@@ -47,6 +47,7 @@ jobs:
             zip function.zip main
       - run:
           name: Check Build go artifact
+          working_directory: './lambda/go'
           command: >-
             ls -al
 
