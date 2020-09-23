@@ -1,0 +1,26 @@
+FROM golang:alpine3.12
+
+LABEL Auuthor="turtlog"
+LABEL Email="g01099387636@gmail.com"
+
+# FIX cannot find package go package from git
+ENV GO111MODULE="on"
+
+WORKDIR /src
+
+# git, zip 설치
+RUN apk add git zip
+
+# main.go의 dependency 설치
+# RUN go get github.com/aws/aws-lambda-go/lambda
+
+# aws-cli 설치
+RUN apk add --no-cache \
+        python3 \
+        py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install \
+        awscli \
+    && rm -rf /var/cache/apk/*
+
+CMD [ "/bin/sh" ]
