@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Build go artifact
           command: >-
-            env GOOS=linux go build -v -ldflags '-d -s -w' -a -tags netgo -installsuffix netgo -o main main.go
+            env GOOS=linux go build -v -ldflags '-d -s -w' -a -tags netgo -installsuffix netgo -o main main.go &&
             zip function.zip main
       - run:
           name: Check Build go artifact
