@@ -1,0 +1,7 @@
+# AWS Lambda
+function.zip
+main
+!main.go
+
+# go module
+go.sum
