@@ -65,6 +65,20 @@ jobs:
       #     command: ./workdir/contacts
       #     background: true # keep service running and proceed to next step
       - run:
+          name: Setting AWS configure default
+          command: >-
+            echo $AWS_REGION
+            echo $AWS_ACCESS_KEY
+            echo $AWS_SECREET_KEY
+            aws configure set default.region $AWS_REGION
+            aws configure set default.region $AWS_ACCESS_KEY
+            aws configure set default.region $AWS_SECREET_KEY
+      - run:
+          name: Check AWS configure default
+          command: >-
+            aws configure list
+
+      - run:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
