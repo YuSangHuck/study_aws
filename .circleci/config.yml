@@ -64,6 +64,22 @@ jobs:
       #       CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
       #     command: ./workdir/contacts
       #     background: true # keep service running and proceed to next step
+
+      # - run:
+      #     name: Validate service is working
+      #     command: |
+      #       sleep 5
+      #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
+
+      # - store_artifacts: # upload test summary for display in Artifacts
+      #     path: /tmp/test-results
+      #     destination: raw-test-output
+
+      # - store_test_results: # upload test results for display in Test Summary
+      #     path: /tmp/test-results
+
+  deploy:
+    steps:
       - run:
           name: Setting AWS configure default
           command: >-
@@ -81,24 +97,6 @@ jobs:
           command: >-
             aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
 
-      # - run:
-      #     name: Validate service is working
-      #     command: |
-      #       sleep 5
-      #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-
-      # - store_artifacts: # upload test summary for display in Artifacts
-      #     path: /tmp/test-results
-      #     destination: raw-test-output
-
-      # - store_test_results: # upload test results for display in Test Summary
-      #     path: /tmp/test-results
-
-  # deploy:
-  #   steps:
-  #     - run:
-  #         name: Build go artifact
-
 workflows:
   build:
     jobs:
@@ -107,6 +105,6 @@ workflows:
           branches:
             only:
               - feature/lambda/go
-  # deploy:
-  #   jobs:
-  #     - deploy
+  deploy:
+    jobs:
+      - deploy
