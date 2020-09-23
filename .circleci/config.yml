@@ -70,9 +70,9 @@ jobs:
             echo $AWS_REGION
             echo $AWS_ACCESS_KEY
             echo $AWS_SECREET_KEY
-            aws configure set default.region $AWS_REGION
-            aws configure set default.region $AWS_ACCESS_KEY
-            aws configure set default.region $AWS_SECREET_KEY
+            aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG
+            aws configure set default.region $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG
+            aws configure set default.region $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
       - run:
           name: Check AWS configure default
           command: >-
