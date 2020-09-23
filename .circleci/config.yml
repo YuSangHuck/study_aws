@@ -57,31 +57,6 @@ jobs:
       #     paths:
       #       - "/go/pkg/mod"
 
-      # - run:
-      #     name: Start service
-      #     environment:
-      #       CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-      #       CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-      #     command: ./workdir/contacts
-      #     background: true # keep service running and proceed to next step
-
-      # - run:
-      #     name: Validate service is working
-      #     command: |
-      #       sleep 5
-      #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-
-      - store_artifacts: # upload test summary for display in Artifacts
-          path: ~/project/lambda/go/main
-          destination: artifact-file
-
-      # - store_test_results: # upload test results for display in Test Summary
-      #     path: /tmp/test-results
-
-  deploy:
-    docker:
-      - image: turtlog/alpine-awscli:golang
-    steps:
       - run:
           name: Setting AWS configure default
           command: >-
@@ -99,11 +74,53 @@ jobs:
           command: >-
             aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
 
+      # - run:
+      #     name: Start service
+      #     environment:
+      #       CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+      #       CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+      #     command: ./workdir/contacts
+      #     background: true # keep service running and proceed to next step
+
+      # - run:
+      #     name: Validate service is working
+      #     command: |
+      #       sleep 5
+      #       curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
+
+      # - store_artifacts: # upload test summary for display in Artifacts
+      #     path: ~/project/lambda/go/main
+      #     destination: artifact-file
+
+      # - store_test_results: # upload test results for display in Test Summary
+      #     path: /tmp/test-results
+
+  # deploy:
+  #   docker:
+  #     - image: turtlog/alpine-awscli:golang
+  #   steps:
+  #     - run:
+  #         name: Setting AWS configure default
+  #         command: >-
+  #           aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG &&
+  #           aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
+  #           aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
+  #     - run:
+  #         name: "[debug]Check AWS configure default"
+  #         command: >-
+  #           aws configure list
+
+  #     - run:
+  #         name: Deploy to aws lambda
+  #         working_directory: './lambda/go'
+  #         command: >-
+  #           aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
+
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
+      # - deploy:
+      #     requires:
+      #       - build
