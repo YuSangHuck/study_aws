@@ -6,12 +6,11 @@ jobs:
     environment:
       # TARGET_GIT_REMOTE: "https://github.com/YuSangHuck/study_aws" # CIRCLE_REPOSITORY_URL
       # TARGET_BRANCH: "feature/lambda/go" # CIRCLE_BRANCH
-      TARGET_PATH: '/src'
+      # TARGET_PATH: '/src' # CIRCLE_WORKING_DIRECTORY == "~/project"
     steps:
       - checkout # check out source code to working directory
-      - run: mkdir -p $TARGET_PATH # create the test results directory
-      - run: cd $TARGET_PATH
-      - run: git checkout $TARGET_BRANCH
+      - run: pwd
+      - run: ls
 
 
       # - run: 
