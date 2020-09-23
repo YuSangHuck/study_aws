@@ -15,9 +15,9 @@ jobs:
           command: go env
 
       # - run:
-      - restore_cache: # restores saved cache if no changes are detected since last run
-          keys:
-            - go-mod-v4-{{ checksum "go.sum" }}
+      # - restore_cache: # restores saved cache if no changes are detected since last run
+      #     keys:
+      #       - go-mod-v4-{{ checksum "go.sum" }}
 
       # #  Wait for Postgres to be ready before proceeding
       # - run:
@@ -45,10 +45,10 @@ jobs:
           command: >-
             ls -al
 
-      - save_cache:
-          key: go-mod-v4-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+      # - save_cache:
+      #     key: go-mod-v4-{{ checksum "go.sum" }}
+      #     paths:
+      #       - "/go/pkg/mod"
 
       # - run:
       #     name: Start service
