@@ -25,7 +25,9 @@ provider:
   runtime: go1.x
   profile: lambda # store in `~/.aws/credentials`
   region: ap-northeast-2 # default is `us-east-1`
-  tracing: true
+  tracing:
+    apiGateway: true
+    lambda: true
 
 # you can overwrite defaults here
 #  stage: dev
