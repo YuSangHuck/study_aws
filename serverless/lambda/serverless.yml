@@ -57,18 +57,22 @@ package:
     - ./bin/**
 
 functions:
-  hello:
-    handler: bin/hello
+  test1:
+    handler: bin/main
     events:
       - http:
-          path: hello
+          path: /test1
           method: get
-  world:
-    handler: bin/world
+    environment:
+      GIN_MODE: release
+  test2:
+    handler: bin/main
     events:
       - http:
-          path: world
+          path: /test2
           method: get
+    environment:
+      GIN_MODE: release
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
