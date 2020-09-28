@@ -23,6 +23,8 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: go1.x
+  profile: lambda # store in `~/.aws/credentials`
+  region: ap-northeast-2 # default is `us-east-1`
 
 # you can overwrite defaults here
 #  stage: dev
