@@ -150,6 +150,9 @@ jobs:
           name: "[debug]Check ls '$HOME/.nvm'"
           command: ls "$HOME/.nvm"
       - run:
+          name: "[debug]Check env"
+          command: env
+      - run:
           name: "[debug]Check npm location"
           command: which npm
       - run:
