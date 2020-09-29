@@ -72,7 +72,7 @@ custom:
       Owner: bar
     vpc: false
     events:
-      - schedule: 'cron(0/5 8-17 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+      - schedule: 'cron(0/5 0-9 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 0:00am and 9:00am (UTC)
     package:
       individually: true
       exclude:
