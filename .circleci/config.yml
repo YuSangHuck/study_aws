@@ -154,10 +154,13 @@ jobs:
           command: env
       - run:
           name: "Set nvm"
-          command: >-
-            export NVM_DIR="$HOME/.nvm" \
-            if [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
-            if [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+          command: export NVM_DIR="$HOME/.nvm"
+      - run:
+          name: "Set nvm nvm.sh"
+          command: if [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      - run:
+          name: "Set nvm bash_completion"
+          command: if [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
       - run:
           name: "[debug]Check env"
           command: env
