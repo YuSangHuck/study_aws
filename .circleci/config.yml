@@ -133,9 +133,9 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG --profile lambda &&
             aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG --profile lambda
       - run:
-          name: "[debug]Check AWS configure default"
+          name: "[debug]Check AWS configure profile lambda"
           command: >-
-            aws configure list
+            aws configure list --profile lambda
       - run:
           name: Deploy to aws lambda
           working_directory: $WORKING_DIR
