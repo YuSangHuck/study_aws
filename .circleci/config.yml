@@ -1,4 +1,10 @@
 version: 2.1
+
+parameters:
+  workingdir_serverless:
+    type: string
+    default: "/go/src/severless/lambda"
+
 jobs:
   build:
     docker:
@@ -118,13 +124,11 @@ jobs:
   build-with-serverless:
     docker:
       - image: turtlog/severless-go:0.2
-    environment:
-      WORKING_DIR: './severless/lambda'
     steps:
       - checkout # check out source code to working directory
       - run:
           name: "[debug]Check source code"
-          working_directory: ${WORKING_DIR}
+          working_directory: << parameters.workingdir_serverless >>
           command: pwd && ls -al
       - run:
           name: Setting AWS configure default
@@ -138,7 +142,7 @@ jobs:
             aws configure list --profile lambda
       - run:
           name: Deploy to aws lambda
-          working_directory: ${WORKING_DIR}
+          working_directory: << parameters.workingdir_serverless >>
           command: make deploy
 
 workflows:
