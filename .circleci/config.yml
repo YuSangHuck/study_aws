@@ -151,7 +151,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+        filters:
+          branches:
+            only:
+              - feature/lambda/go
       # - deploy:
       #     requires:
       #       - build
