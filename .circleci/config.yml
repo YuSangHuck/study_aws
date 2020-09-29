@@ -125,7 +125,7 @@ jobs:
       - run:
           name: "[debug]Check source code"
           working_directory: $WORKING_DIR
-          command: ls -al
+          command: ls -al && pwd
       - run:
           name: Setting AWS configure default
           command: >-
