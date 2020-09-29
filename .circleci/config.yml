@@ -128,7 +128,7 @@ jobs:
       - checkout # check out source code to working directory
       - run:
           name: "[debug]Check source code"
-          working_directory: << parameters.workingdir_serverless >>
+          working_directory: << pipeline.parameters.workingdir_serverless >>
           command: pwd && ls -al
       - run:
           name: Setting AWS configure default
@@ -142,7 +142,7 @@ jobs:
             aws configure list --profile lambda
       - run:
           name: Deploy to aws lambda
-          working_directory: << parameters.workingdir_serverless >>
+          working_directory: << pipeline.parameters.workingdir_serverless >>
           command: make deploy
 
 workflows:
