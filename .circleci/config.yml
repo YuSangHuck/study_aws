@@ -123,7 +123,7 @@ jobs:
   #           aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
   build-with-serverless:
     docker:
-      - image: turtlog/severless-go:0.2
+      - image: turtlog/severless-go:0.3
     steps:
       - checkout # check out source code to working directory
       # - run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
