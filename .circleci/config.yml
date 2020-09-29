@@ -130,8 +130,8 @@ jobs:
           name: Setting AWS configure default
           command: >-
             aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG &&
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
-            aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG --profile lambda &&
+            aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG --profile lambda
       - run:
           name: "[debug]Check AWS configure default"
           command: >-
