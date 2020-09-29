@@ -59,6 +59,37 @@ package:
   include:
     - ./bin/**
 
+custom:
+  warmup:
+    enabled: true # Whether to warm up functions by default or not
+    folderName: '_warmup' # Name of the folder created for the generated warmup
+    cleanFolder: false
+    memorySize: 256
+    name: 'make-them-pop'
+    role: myCustRole0
+    tags:
+      Project: foo
+      Owner: bar
+    vpc: false
+    events:
+      - schedule: 'cron(0/5 8-17 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+    package:
+      individually: true
+      exclude:
+        - ./**
+      include:
+        - ./bin/**
+    timeout: 20
+    prewarm: true # Run WarmUp immediately after a deploymentlambda
+    clientContext:
+      source: my-custom-source
+      other: '20'
+    payload:
+      source: my-custom-source
+      other: 20
+    payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
+    concurrency: 5 # Warm up 5 concurrent instances
+
 functions:
   test1:
     handler: bin/main
@@ -68,6 +99,8 @@ functions:
           method: get
     environment:
       GIN_MODE: release
+    warmup:
+      enabled: false
   test2:
     handler: bin/main
     events:
@@ -76,6 +109,11 @@ functions:
           method: get
     environment:
       GIN_MODE: release
+    warmup:
+      enabled:
+        - dev
+      # concurrency: 2
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -128,6 +166,62 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+# WarmUp requires some permissions to be able to invoke your lambdas
+resources:
+  Resources:
+    myCustRole0:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /my/cust/path/
+        RoleName: MyCustRole0
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: myPolicyName
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow # Warmer lambda to send logs to Cloudwatch
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:logs'
+                        - Ref: 'AWS::Region'
+                        - Ref: 'AWS::AccountId'
+                        - 'log-group:/aws/lambda/*:*:*'
+                - Effect: Allow # Warmer lambda to manage ENIS (only needed if deploying to VPC. https://docs.aws.amazon.com/lambda/latest/dg/vpc.html)
+                  Action:
+                    - ec2:CreateNetworkInterface
+                    - ec2:DescribeNetworkInterfaces
+                    - ec2:DetachNetworkInterface
+                    - ec2:DeleteNetworkInterface
+                  Resource: '*'
+                - Effect: Allow # Warmer lambda to invoke the functions to be warmed
+                  Action:
+                    - 'lambda:InvokeFunction'
+                  Resource:
+                  - Fn::Join:
+                    - ':'
+                    - - arn:aws:lambda
+                      - Ref: AWS::Region
+                      - Ref: AWS::AccountId
+                      - function:${self:service}-${opt:stage, self:provider.stage}-*
+                - Effect: Allow # PutTraceSegments
+                  Action:
+                    - xray:PutTraceSegments
+                  Resource: '*'
 
 plugins:
   - serverless-plugin-warmup
