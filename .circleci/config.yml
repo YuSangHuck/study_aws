@@ -144,6 +144,12 @@ jobs:
           command: >-
             aws configure list --profile lambda
       - run:
+          name: "[debug]Check npm location"
+          command: which npm
+      - run:
+          name: "[debug]Check ~/.bashrc"
+          command: cat ~/.bashrc
+      - run:
           name: Deploy to aws lambda
           # working_directory: << pipeline.parameters.workingdir_serverless >>
           working_directory: './serverless/lambda'
