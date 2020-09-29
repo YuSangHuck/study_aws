@@ -127,7 +127,7 @@ jobs:
     steps:
       - checkout # check out source code to working directory
       # - run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-      - run: ls -R
+      - run: pwd && ls -R
       - run:
           name: "[debug]Check source code"
           working_directory: << pipeline.parameters.workingdir_serverless >>
