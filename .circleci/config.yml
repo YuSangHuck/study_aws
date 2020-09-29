@@ -124,8 +124,8 @@ jobs:
       - checkout # check out source code to working directory
       - run:
           name: "[debug]Check source code"
-          working_directory: $WORKING_DIR
-          command: ls -al && pwd
+          working_directory: ${WORKING_DIR}
+          command: pwd && ls -al
       - run:
           name: Setting AWS configure default
           command: >-
@@ -138,7 +138,7 @@ jobs:
             aws configure list --profile lambda
       - run:
           name: Deploy to aws lambda
-          working_directory: $WORKING_DIR
+          working_directory: ${WORKING_DIR}
           command: make deploy
 
 workflows:
