@@ -65,21 +65,21 @@ custom:
     folderName: '_warmup' # Name of the folder created for the generated warmup
     cleanFolder: false
     memorySize: 256
-    name: 'make-them-pop'
+    name: 'make-them-pop' # functino name for invoking other lambda functinos
     role: myCustRole0
     tags:
       Project: foo
       Owner: bar
     vpc: false
     events:
-      - schedule: 'cron(0/5 0-9 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 0:00am and 9:00am (UTC)
+      - schedule: rate(10 minutes) # Run WarmUp every 10 minutes
     package:
       individually: true
       exclude:
         - ./**
       include:
-        - ./bin/**
-    timeout: 20
+        - './_warmup/**'
+    timeout: 10
     prewarm: true # Run WarmUp immediately after a deploymentlambda
     clientContext:
       source: my-custom-source
