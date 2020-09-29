@@ -129,8 +129,9 @@ jobs:
       # - run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
       - run: pwd && echo $CIRCLE_WORKING_DIRECTORY && ls -R
       - run:
-          name: "[debug]Check source code"
-          working_directory: << pipeline.parameters.workingdir_serverless >>
+          name: "[debug]Check source code
+          # working_directory: << pipeline.parameters.workingdir_serverless >>"
+          working_directory: './serverless/lambda'
           command: pwd && ls -al
       - run:
           name: Setting AWS configure default
@@ -144,7 +145,8 @@ jobs:
             aws configure list --profile lambda
       - run:
           name: Deploy to aws lambda
-          working_directory: << pipeline.parameters.workingdir_serverless >>
+          # working_directory: << pipeline.parameters.workingdir_serverless >>
+          working_directory: './serverless/lambda'
           command: make deploy
 
 workflows:
