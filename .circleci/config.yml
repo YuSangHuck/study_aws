@@ -115,6 +115,31 @@ jobs:
   #         working_directory: './lambda/go'
   #         command: >-
   #           aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
+  build-with-serverless:
+    docker:
+      - image: turtlog/severless-go:0.2
+    environment:
+      WORKING_DIR: './severless/lambda'
+    steps:
+      - checkout # check out source code to working directory
+      - run:
+          name: "[debug]Check source code"
+          working_directory: $WORKING_DIR
+          command: ls -al
+      - run:
+          name: Setting AWS configure default
+          command: >-
+            aws configure set default.region $AWS_REGION_HELLO_LAMBDA_GOLANG &&
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_HELLO_LAMBDA_GOLANG &&
+            aws configure set aws_secret_access_key $AWS_SECREET_KEY_HELLO_LAMBDA_GOLANG
+      - run:
+          name: "[debug]Check AWS configure default"
+          command: >-
+            aws configure list
+      - run:
+          name: Deploy to aws lambda
+          working_directory: $WORKING_DIR
+          command: make deploy
 
 workflows:
   version: 2
@@ -124,3 +149,8 @@ workflows:
       # - deploy:
       #     requires:
       #       - build
+      - build-with-serverless:
+        filters:
+          branches:
+            only:
+              - feature/serverless/go
