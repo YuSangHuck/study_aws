@@ -164,9 +164,9 @@ jobs:
       - run:
           name: "[debug]Check env"
           command: env
-      - run:
-          name: "[debug]Check npm location"
-          command: which npm
+      # - run:
+      #     name: "[debug]Check npm location"
+      #     command: which npm
       - run:
           name: Deploy to aws lambda
           # working_directory: << pipeline.parameters.workingdir_serverless >>
