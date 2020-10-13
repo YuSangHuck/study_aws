@@ -55,5 +55,5 @@ func main() {
 	//
 	// implement with aws-sdk-lambda
 	//
-	lambda.Start(LongRunningHandler)
+	lambda.Start(lambdaSDKHandler)
 }
