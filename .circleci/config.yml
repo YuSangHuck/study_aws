@@ -178,15 +178,15 @@ workflows:
   build-deploy:
     jobs:
       - build-deploy-native-lambda:
-        filters:
-          branches:
-            only:
-              - feature/lambda/go
+          filters:
+            branches:
+              only:
+                - feature/lambda/go
       # - deploy:
       #     requires:
       #       - build
       - build-with-serverless:
-        filters:
-          branches:
-            only:
-              - feature/serverless/go
+          filters:
+            branches:
+              only:
+                - feature/serverless/go
