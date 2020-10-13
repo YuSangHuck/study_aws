@@ -172,6 +172,11 @@ jobs:
           command: ls /root/.nvm/versions/node/v10.22.1/bin/
       - run:
           name: "[debug]Check npm location"
+          command: >-
+            export PATH=/root/.nvm/versions/node/v10.22.1/bin:$PATH
+            which npm
+      - run:
+          name: "[debug]Check npm location"
           command: which npm
       - run:
           name: Deploy to aws lambda
