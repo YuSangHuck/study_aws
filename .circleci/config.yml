@@ -169,6 +169,9 @@ jobs:
           command: whoami
       - run:
           name: "[debug]Check npm location"
+          command: ls /root/.nvm/versions/node/v10.22.1/bin/
+      - run:
+          name: "[debug]Check npm location"
           command: which npm
       - run:
           name: Deploy to aws lambda
