@@ -1,10 +1,7 @@
 package main
 
 import (
-	//
-	// implement with aws-sdk-lambda
-	//
-	"context"
+	"fmt"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	/*
@@ -30,8 +27,17 @@ func test2(c *gin.Context) {
 }
 */
 
-func lambdaSDKHandler(ctx context.Context) (string, error) {
-	return "반갑수다!", nil
+type MyEvent struct {
+	Name string `json:"What is your name?"`
+	Age  int    `json:"How old are you?"`
+}
+
+type MyResponse struct {
+	Message string `json:"Answer:"`
+}
+
+func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
+	return MyResponse{Message: fmt.Sprintf("%s is %d years old!", event.Name, event.Age)}, nil
 }
 
 func main() {
@@ -55,5 +61,5 @@ func main() {
 	//
 	// implement with aws-sdk-lambda
 	//
-	lambda.Start(lambdaSDKHandler)
+	lambda.Start(HandleLambdaEvent)
 }
