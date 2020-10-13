@@ -173,11 +173,14 @@ jobs:
       - run:
           name: "[debug]Check npm location"
           command: >-
-            export PATH=/root/.nvm/versions/node/v10.22.1/bin:$PATH
-            which npm
+            export PATH=/root/.nvm/versions/node/v10.22.1/bin:$PATH &&
+            which npm &&
+            npm --version
       - run:
           name: "[debug]Check npm location"
-          command: which npm
+          command: >-
+            which npm &&
+            npm --version
       - run:
           name: Deploy to aws lambda
           # working_directory: << pipeline.parameters.workingdir_serverless >>
