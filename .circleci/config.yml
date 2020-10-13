@@ -176,6 +176,7 @@ jobs:
           working_directory: './serverless/lambda'
           command: >-
             export PATH=/root/.nvm/versions/node/v10.22.1/bin:$PATH &&
+            export PATH=/root/.serverless/bin:$PATH &&
             which npm &&
             npm --version &&
             make deploy
