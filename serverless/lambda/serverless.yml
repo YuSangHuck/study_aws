@@ -72,7 +72,7 @@ custom:
       Owner: bar
     vpc: false
     events:
-      - schedule: rate(10 minutes) # Run WarmUp every 10 minutes
+      - schedule: rate(1 minutes) # Run WarmUp every 10 minutes
     package:
       individually: true
       exclude:
