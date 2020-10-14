@@ -96,7 +96,7 @@ functions:
     events:
       - http:
           path: /test1
-          method: get
+          method: post
     environment:
       GIN_MODE: release
     warmup:
@@ -106,7 +106,7 @@ functions:
     events:
       - http:
           path: /test2
-          method: get
+          method: post
     environment:
       GIN_MODE: release
     warmup:
