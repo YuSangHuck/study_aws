@@ -85,7 +85,7 @@ custom:
       source: my-custom-source
       other: '20'
     payload:
-      source: my-custom-source
+      source: serverless-plugin-warmup
       other: 20
     payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
     concurrency: 5 # Warm up 5 concurrent instances
