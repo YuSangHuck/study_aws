@@ -88,7 +88,7 @@ custom:
     #   source: serverless-plugin-warmup
     #   other: 20
     # payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
-    concurrency: 5 # Warm up 5 concurrent instances
+    concurrency: 1 # Warm up 5 concurrent instances
 
 functions:
   test1:
