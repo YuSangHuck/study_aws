@@ -16,6 +16,7 @@ import (
 )
 
 func HandleLambdaEvent(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	fmt.Println("Received request: ", request)
 	fmt.Println("Received body: ", request.Body)
 
 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
