@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	"encoding/json"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	//
@@ -25,6 +27,13 @@ func HandleLambdaEvent(request events.APIGatewayProxyRequest) (events.APIGateway
 	for key, value := range request.Headers {
 		fmt.Printf("    %s: %s\n", key, value)
 	}
+
+	b, err := json.Marshal(request)
+	if err != nil {
+		fmt.Println(err)
+		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	}
+	fmt.Println("Marshaled request: ", string(b))
 
 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
 }
