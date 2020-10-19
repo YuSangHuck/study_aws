@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"encoding/json"
@@ -17,7 +18,7 @@ import (
 	// "github.com/gin-gonic/gin"
 )
 
-func HandleLambdaEvent(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	fmt.Println("Received request: ", request)
 	fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
 	fmt.Println("Received body: ", request.Body)
@@ -28,12 +29,18 @@ func HandleLambdaEvent(request events.APIGatewayProxyRequest) (events.APIGateway
 		fmt.Printf("    %s: %s\n", key, value)
 	}
 
-	b, err := json.Marshal(request)
+	marshaledRequest, err := json.Marshal(request)
 	if err != nil {
 		fmt.Println(err)
 		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
 	}
-	fmt.Println("Marshaled request: ", string(b))
+	fmt.Println("Marshaled request: ", string(marshaledRequest))
+	marshaledContext, err := json.Marshal(ctx)
+	if err != nil {
+		fmt.Println(err)
+		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	}
+	fmt.Println("Marshaled ctx: ", string(marshaledContext))
 
 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
 }
