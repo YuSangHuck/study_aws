@@ -84,9 +84,10 @@ custom:
     clientContext:
       source: my-custom-source
       other: '20'
-    # payload:
-    #   source: serverless-plugin-warmup
-    #   other: 20
+    payload:
+      userAgent: serverless-plugin-warmup
+      source: serverless-plugin-warmup
+      other: 20
     # payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
     concurrency: 1 # Warm up 5 concurrent instances
 
