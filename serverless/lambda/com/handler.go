@@ -2,9 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
-
-	"encoding/json"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -19,28 +16,28 @@ import (
 )
 
 func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	fmt.Println("Received request: ", request)
-	fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
-	fmt.Println("Received body: ", request.Body)
-	fmt.Printf("Body size = %d.\n", len(request.Body))
+	// fmt.Println("Received request: ", request)
+	// fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
+	// fmt.Println("Received body: ", request.Body)
+	// fmt.Printf("Body size = %d.\n", len(request.Body))
 
-	fmt.Println("Headers:")
-	for key, value := range request.Headers {
-		fmt.Printf("    %s: %s\n", key, value)
-	}
+	// fmt.Println("Headers:")
+	// for key, value := range request.Headers {
+	// 	fmt.Printf("    %s: %s\n", key, value)
+	// }
 
-	marshaledRequest, err := json.Marshal(request)
-	if err != nil {
-		fmt.Println(err)
-		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
-	}
-	fmt.Println("Marshaled request: ", string(marshaledRequest))
-	marshaledContext, err := json.Marshal(ctx)
-	if err != nil {
-		fmt.Println(err)
-		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
-	}
-	fmt.Println("Marshaled ctx: ", string(marshaledContext))
+	// marshaledRequest, err := json.Marshal(request)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	// }
+	// fmt.Println("Marshaled request: ", string(marshaledRequest))
+	// marshaledContext, err := json.Marshal(ctx)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	// }
+	// fmt.Println("Marshaled ctx: ", string(marshaledContext))
 
 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
 }
