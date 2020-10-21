@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -40,6 +41,23 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
 	}
 	fmt.Println("Marshaled lc: ", string(marshaledLc))
+
+	// if caller was 'serverless-plugin-warmup', return function
+	if lc.ClientContext.Custom.source == "serverless-plugin-warmup" {
+		fmt.Print("from serverless-plugin-warmup")
+		return events.APIGatewayProxyResponse{Body: "from serverless-plugin-warmup", StatusCode: 202}, nil
+	}
+
+	fmt.Print("from endpoint")
+
+	start := time.Now()
+
+	for i := 0; i < 1000000000; i++ {
+	}
+
+	elapsed := time.Since(start)
+	fmt.Println(elapsed)
+	fmt.Println(elapsed.Nanoseconds())
 
 	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 }
