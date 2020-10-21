@@ -38,8 +38,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
 	// }
 	// fmt.Println("Marshaled ctx: ", string(marshaledContext))
-
-	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
+	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 }
 
 func main() {
