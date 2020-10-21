@@ -43,7 +43,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	fmt.Println("Marshaled lc: ", string(marshaledLc))
 
 	// if caller was 'serverless-plugin-warmup', return function
-	fmt.Print(lc.ClientContext.Custom)
+	fmt.Print(lc.ClientContext.Custom["source"])
 	// if lc.ClientContext.Custom.source == "serverless-plugin-warmup" {
 	// 	fmt.Print("from serverless-plugin-warmup")
 	// 	return events.APIGatewayProxyResponse{Body: "from serverless-plugin-warmup", StatusCode: 202}, nil
