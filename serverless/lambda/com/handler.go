@@ -56,7 +56,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 
 	elapsed := time.Since(start)
 	fmt.Println(elapsed)
-	fmt.Println(elapsed.Nanoseconds())
+	// fmt.Println(elapsed.Nanoseconds())
 
 	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 }
