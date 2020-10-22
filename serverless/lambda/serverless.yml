@@ -115,6 +115,39 @@ functions:
     warmup:
       enabled:
         - dev
+  test3:
+    handler: bin/main
+    events:
+      - http:
+          path: /test3
+          method: post
+    environment:
+      GIN_MODE: release
+    warmup:
+      enabled:
+        - dev
+  test4:
+    handler: bin/main
+    events:
+      - http:
+          path: /test4
+          method: post
+    environment:
+      GIN_MODE: release
+    warmup:
+      enabled:
+        - dev
+  test5:
+    handler: bin/main
+    events:
+      - http:
+          path: /test5
+          method: post
+    environment:
+      GIN_MODE: release
+    warmup:
+      enabled:
+        - dev
       # concurrency: 2
 
 #    The following are a few example events you can configure
