@@ -2,13 +2,11 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/aws/aws-lambda-go/lambdacontext"
 	//
 	// implement with gin-gonic
 	//
@@ -20,27 +18,27 @@ import (
 )
 
 func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	marshaledRequest, err := json.Marshal(request)
-	if err != nil {
-		fmt.Println(err)
-		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
-	}
-	fmt.Println("Marshaled request: ", string(marshaledRequest))
+	// marshaledRequest, err := json.Marshal(request)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	// }
+	// fmt.Println("Marshaled request: ", string(marshaledRequest))
 
-	marshaledContext, err := json.Marshal(ctx)
-	if err != nil {
-		fmt.Println(err)
-		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
-	}
-	fmt.Println("Marshaled ctx: ", string(marshaledContext))
+	// marshaledContext, err := json.Marshal(ctx)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	// }
+	// fmt.Println("Marshaled ctx: ", string(marshaledContext))
 
-	lc, _ := lambdacontext.FromContext(ctx)
-	marshaledLc, err := json.Marshal(lc)
-	if err != nil {
-		fmt.Println(err)
-		return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
-	}
-	fmt.Println("Marshaled lc: ", string(marshaledLc))
+	// lc, _ := lambdacontext.FromContext(ctx)
+	// marshaledLc, err := json.Marshal(lc)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 500}, err
+	// }
+	// fmt.Println("Marshaled lc: ", string(marshaledLc))
 
 	// if caller was 'serverless-plugin-warmup', return function
 	if lc.ClientContext.Custom["source"] == "serverless-plugin-warmup" {
@@ -48,7 +46,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 		return events.APIGatewayProxyResponse{Body: "from serverless-plugin-warmup", StatusCode: 202}, nil
 	}
 
-	fmt.Println("from endpoint")
+	// fmt.Println("from endpoint")
 
 	start := time.Now()
 
