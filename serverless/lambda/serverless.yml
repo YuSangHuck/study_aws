@@ -29,6 +29,7 @@ provider:
     apiGateway: true
     lambda: true
   memorySize: 1024
+  timeout: 20
 
 # you can overwrite defaults here
 #  stage: dev
