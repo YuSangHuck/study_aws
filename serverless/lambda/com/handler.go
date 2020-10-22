@@ -44,7 +44,8 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 
 	// if caller was 'serverless-plugin-warmup', return function
 	lambdaContextElapsed := time.Now().Sub(start)
-	fmt.Println(lambdaContextElapsed.Nanoseconds())
+	// fmt.Println(lambdaContextElapsed.Nanoseconds())
+	fmt.Println(lambdaContextElapsed)
 	start = time.Now()
 
 	if lc.ClientContext.Custom["source"] == "serverless-plugin-warmup" {
@@ -52,7 +53,8 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 		return events.APIGatewayProxyResponse{Body: "from serverless-plugin-warmup", StatusCode: 202}, nil
 	}
 	ifConditionElapsed := time.Now().Sub(start)
-	fmt.Println(ifConditionElapsed.Nanoseconds())
+	// fmt.Println(ifConditionElapsed.Nanoseconds())
+	fmt.Println(ifConditionElapsed)
 
 	fmt.Println("from endpoint")
 	start = time.Now()
@@ -60,7 +62,8 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	for i := 0; i < 1000000000; i++ {
 	}
 	timeElapsed := time.Now().Sub(start)
-	fmt.Println(timeElapsed.Nanoseconds())
+	// fmt.Println(timeElapsed.Nanoseconds())
+	fmt.Println(timeElapsed)
 
 	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 }
