@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambdacontext"
 	//
 	// implement with gin-gonic
 	//
@@ -32,7 +33,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	// }
 	// fmt.Println("Marshaled ctx: ", string(marshaledContext))
 
-	// lc, _ := lambdacontext.FromContext(ctx)
+	lc, _ := lambdacontext.FromContext(ctx)
 	// marshaledLc, err := json.Marshal(lc)
 	// if err != nil {
 	// 	fmt.Println(err)
