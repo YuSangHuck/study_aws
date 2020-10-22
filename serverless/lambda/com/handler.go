@@ -51,8 +51,8 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 
 	start := time.Now()
 
-	for i := 0; i < 1000000000; i++ {
-	}
+	// for i := 0; i < 10000000; i++ {
+	// }
 
 	elapsed := time.Since(start)
 	fmt.Println(elapsed)
