@@ -33,6 +33,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	// }
 	// fmt.Println("Marshaled ctx: ", string(marshaledContext))
 
+	start := time.Now()
 	lc, _ := lambdacontext.FromContext(ctx)
 	// marshaledLc, err := json.Marshal(lc)
 	// if err != nil {
@@ -42,21 +43,24 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 	// fmt.Println("Marshaled lc: ", string(marshaledLc))
 
 	// if caller was 'serverless-plugin-warmup', return function
+	lambdaContextElapsed := time.Now().Sub(start)
+	fmt.Println(lambdaContextElapsed.Nanoseconds())
+	start = time.Now()
+
 	if lc.ClientContext.Custom["source"] == "serverless-plugin-warmup" {
 		fmt.Println("from serverless-plugin-warmup")
 		return events.APIGatewayProxyResponse{Body: "from serverless-plugin-warmup", StatusCode: 202}, nil
 	}
+	ifConditionElapsed := time.Now().Sub(start)
+	fmt.Println(ifConditionElapsed.Nanoseconds())
 
-	// fmt.Println("from endpoint")
+	fmt.Println("from endpoint")
+	start = time.Now()
 
-	start := time.Now()
-
-	// for i := 0; i < 10000000; i++ {
-	// }
-
-	elapsed := time.Since(start)
-	fmt.Println(elapsed)
-	// fmt.Println(elapsed.Nanoseconds())
+	for i := 0; i < 10000000; i++ {
+	}
+	timeElapsed := time.Now().Sub(start)
+	fmt.Println(timeElapsed.Nanoseconds())
 
 	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 }
