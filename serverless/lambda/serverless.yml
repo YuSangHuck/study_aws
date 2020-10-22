@@ -28,7 +28,7 @@ provider:
   tracing:
     apiGateway: true
     lambda: true
-  memorySize: 512
+  memorySize: 1024
 
 # you can overwrite defaults here
 #  stage: dev
