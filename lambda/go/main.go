@@ -27,14 +27,13 @@ func LongRunningHandler(ctx context.Context) (events.APIGatewayProxyResponse, er
 
 	// fmt.Println("from endpoint")
 
+	fmt.Println("from endpoint")
 	start := time.Now()
 
 	for i := 0; i < 1000000000; i++ {
 	}
-
-	elapsed := time.Since(start)
-	fmt.Println(elapsed)
-	// fmt.Println(elapsed.Nanoseconds())
+	timeElapsed := time.Now().Sub(start)
+	fmt.Println(timeElapsed.Nanoseconds())
 
 	return events.APIGatewayProxyResponse{Body: "반갑수다", StatusCode: 200}, nil
 	// deadline, _ := ctx.Deadline()
