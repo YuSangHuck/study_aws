@@ -30,7 +30,7 @@ func LongRunningHandler(ctx context.Context) (events.APIGatewayProxyResponse, er
 	fmt.Println("from endpoint")
 	start := time.Now()
 
-	for i := 0; i < 1000000000; i++ {
+	for i := 0; i < 100000000; i++ {
 	}
 	timeElapsed := time.Now().Sub(start)
 	// fmt.Println(timeElapsed.Nanoseconds())
