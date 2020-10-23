@@ -72,27 +72,27 @@ jobs:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda create-function --function-name ${TARGET_LAMBDA_FUNCTION}1 --runtime go1.x --handler main --role arn:aws:iam::752417200383:role/service-role/hello-lambda-golang-role-o515u5rv --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name ${TARGET_LAMBDA_FUNCTION}1 --zip-file fileb://function.zip
       - run:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda create-function --function-name ${TARGET_LAMBDA_FUNCTION}2 --runtime go1.x --handler main --role arn:aws:iam::752417200383:role/service-role/hello-lambda-golang-role-o515u5rv --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name ${TARGET_LAMBDA_FUNCTION}2 --zip-file fileb://function.zip
       - run:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda create-function --function-name ${TARGET_LAMBDA_FUNCTION}3 --runtime go1.x --handler main --role arn:aws:iam::752417200383:role/service-role/hello-lambda-golang-role-o515u5rv --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name ${TARGET_LAMBDA_FUNCTION}3 --zip-file fileb://function.zip
       - run:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda create-function --function-name ${TARGET_LAMBDA_FUNCTION}4 --runtime go1.x --handler main --role arn:aws:iam::752417200383:role/service-role/hello-lambda-golang-role-o515u5rv --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name ${TARGET_LAMBDA_FUNCTION}4 --zip-file fileb://function.zip
       - run:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda create-function --function-name ${TARGET_LAMBDA_FUNCTION}5 --runtime go1.x --handler main --role arn:aws:iam::752417200383:role/service-role/hello-lambda-golang-role-o515u5rv --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name ${TARGET_LAMBDA_FUNCTION}5 --zip-file fileb://function.zip
 
       # - run:
       #     name: Start service
