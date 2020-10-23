@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"runtime"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -18,7 +19,13 @@ import (
 	// "github.com/gin-gonic/gin"
 )
 
+func getCPUInfos() {
+	cores := runtime.NumCPU()
+	fmt.Printf("This machine has %d CPU cores. \n", cores)
+}
+
 func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	getCPUInfos()
 	// marshaledRequest, err := json.Marshal(request)
 	// if err != nil {
 	// 	fmt.Println(err)
