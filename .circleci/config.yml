@@ -72,7 +72,27 @@ jobs:
           name: Deploy to aws lambda
           working_directory: './lambda/go'
           command: >-
-            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION --zip-file fileb://function.zip
+            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION1 --zip-file fileb://function.zip
+      - run:
+          name: Deploy to aws lambda
+          working_directory: './lambda/go'
+          command: >-
+            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION2 --zip-file fileb://function.zip
+      - run:
+          name: Deploy to aws lambda
+          working_directory: './lambda/go'
+          command: >-
+            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION3 --zip-file fileb://function.zip
+      - run:
+          name: Deploy to aws lambda
+          working_directory: './lambda/go'
+          command: >-
+            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION4 --zip-file fileb://function.zip
+      - run:
+          name: Deploy to aws lambda
+          working_directory: './lambda/go'
+          command: >-
+            aws lambda update-function-code --function-name $TARGET_LAMBDA_FUNCTION5 --zip-file fileb://function.zip
 
       # - run:
       #     name: Start service
