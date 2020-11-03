@@ -104,17 +104,17 @@ functions:
       GIN_MODE: release
     warmup:
       enabled: false
-  test2:
-    handler: bin/main
-    events:
-      - http:
-          path: /test2
-          method: post
-    environment:
-      GIN_MODE: release
-    warmup:
-      enabled:
-        - dev
+  # test2:
+  #   handler: bin/main
+  #   events:
+  #     - http:
+  #         path: /test2
+  #         method: post
+  #   environment:
+  #     GIN_MODE: release
+  #   warmup:
+  #     enabled:
+  #       - dev
       # concurrency: 2
 
 #    The following are a few example events you can configure
