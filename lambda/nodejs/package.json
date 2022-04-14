@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/YuSangHuck/study_aws#readme",
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "gm": "^1.23.1"
   }
 }
